@@ -1,0 +1,138 @@
+JVM：JVM有自己完善的硬件架构，如处理器、堆栈（Stack）、寄存器等，还具有相应的指令系统（字节码就是一种指令格式）。
+JVM屏蔽了与具体操作系统平台相关的信息，使得Java程序只需要生成在Java虚拟机上运行的目标代码（字节码），就可以在多种平台上不加修改地运行。
+JVM是Java平台无关的基础。JVM负责运行字节码：JVM把每一条要执行的字节码交给解释器，翻译成对应的机器码，然后由解释器执行。
+JVM解释执行字节码文件就是JVM操作Java解释器进行解释执行字节码文件的过程。
+
+Java编译器：将Java源文件（.java文件）编译成字节码文件（.class文件，是特殊的二进制文件，二进制字节码文件），这种字节码就是JVM的“机器语言”。
+javac.exe可以简单看成是Java编译器。
+Java解释器：是JVM的一部分。Java解释器用来解释执行Java编译器编译后的程序。
+java.exe可以简单看成是Java解释器。
+CLASSPATH：
+在没有配置CLASSPATH环境变量时，java.exe命令在找class文件时是默认在当前目录下寻找的。
+配置过CLASSPATH环境后，java命令是按照CLASSPATH变量中的路径来的寻找class文件的：https://blog.csdn.net/cuipp0509/article/details/74852740
+
+LINUX:
+/bin:二进制执行 常用命令存放目录（ls）
+/etc：系统管理和配置文件
+/home：用户文件根目录
+/usr：系统应用程序
+/opt：额外应用程序
+
+cd usr:切换到该目录下usr
+cd ~：切到用户主目录
+cd -：切到上一个所在目录
+cd /：且到系统根目录
+
+mkdir 目录名 ：增加目录
+find 目录 参数（-name）：
+mv 旧目录名 目录新名称（也可用于文件、压缩包重命名）
+mv 目录名 移动到的新目录位置：剪切操作
+
+cp - r 目录名 目标位置：拷贝操作
+rm - rf 目录/文件/压缩包 删
+
+touch 文件名
+cat/more/less/tail 文件名：查看文件内容
+Echo “aaaa”>>text.txt追加写 
+
+Clear清屏
+Ctrl+C 中断程序 ctrl+Z挂后台
+
+vim：i编辑模式 esc进入底行 
+wq 保存文件并退出vi
+wq! 强制保存文件，并退出vi
+q: 不保存文件，退出vi
+q! 不保存文件，强制退出vi
+e! 放弃所有修改，从上次保存文件开始再编辑
+
+tar - z（调用gzip压缩）c（打包）v（显示运行过程）f（指定文件名） 打包压缩后的文件名 要打包压缩的文件：默认打包到当前
+tar - x（解压）vf 文件名：默认解压到当前 
+tar - xvf xxx.tar.gz - C 想解压到的具体位置
+
+ls -lrt ：组合起来就是按修改时间倒序输出
+
+chmod u(文件的创建者)=rwx, g（文件的创建者在的组）=rw, o（创建者在的组以外）=r xxx.txt 等价于 chmod 764 xxx.txt
+
+ps - ef/aux 查看当前系统运行进程
+ps aux | grep redis 查看redis字符串的进程
+kill - 9 进程pid 强制杀死进程
+
+ifconfig查看当前系统网卡信息
+ping查看某某机器连接情况
+netstat -an 查看当前系统端口使用
+
+
+GIT:
+https://wenku.baidu.com/view/86c2714adcccda38376baf1ffc4ffe473268fd5d.html
+git版本库就是本地仓库（实际就是目录）
+gid add（-u全部track的文件）是把文件在工作目录的改动（包括增删改）添加到暂存区 提交时以add版本为准，文件内容改动了，需add到暂存区（即使改动前已经add到了暂存区）         
+git commit会打开.git/editmsg  commit -m”xxx”是把文件从暂存区提交到版本库
+git checkout -- filename 放弃工作区某文件修改 
+git reset HEAD filename 撤销add操作
+
+ssh -T git@github.com 验证与github连接
+git remote add repo_name git远程仓储地址  git remote rm（删除）repo_name
+git remote -v 查看关联的所有的远程仓储名称及地址
+git push -u repo_name master 将本地的master分支推送到远程仓储(repo_name)分支(master)，同时指定默认为远程主机，后面就可以不加任何参数使用git push了
+
+Git init新建一个git代码库 本地得到.git  
+Git clone 地址远程拉代码 自动init
+
+git branch查看分支(*表示当前)  git branch brach_name创建新分支
+git checkout branch_name切换到新分支
+git branch -d branch_name删分支
+
+在master：git merge branch_name 合入新分支变更
+
+git stash 暂存本地修改 查看git stash list 后 git stash pop stash{}
+
+MAVEN:
+配置镜像仓库 原远程仓库不能访问
+pom文件放在根目录 compile时会先从pom依赖里去找
+groupId、artifactId：包名、项目模块名  artifactId项目名-模块名 package包名 和version 定一个坐标 https://www.imooc.com/video/8652
+maven生命周期：https://www.imooc.com/video/8644
+mvn clean 清理上一次构建生成的全部文件
+mvn compile编项目依赖jar和第三方插件  生成target下的classes 
+mvn test -Dtest=[ClassName]#[MethodName] 运行测试用例@Test  生成reports
+mvn package（compile+test）将项目打包成jar/war放到target   
+mvn install 还多一步把打的classes放到本地仓库供其他模块引用
+
+mvn archetype:generate （参数） 构建项目骨架：https://www.imooc.com/video/8601
+
+<build> 为构建相关行为提供支持
+配置执行目标<execution> <phase>package</>   <goals>jar-no-fork</>   https://www.imooc.com/video/8615
+pom标签解析：https://www.imooc.com/video/8645
+<dependency><scope>test</>比如对junit的jar的依赖的范围只在测试范围有用</>
+pom依赖传递（A->B->C）C只需B的核心功能，用<exclusion>排除对A的依赖  解决冲突：短路/近路优先
+<parent>在子模块继承父模块依赖
+<modules>...聚合运行多个maven项 
+<dependencyManagement>用于声明依赖，并不实现引入，子项目需要显示的声明需要用的父模块的依赖
+
+
+IDEA:
+ctrl+b跳到定义
+ctrl+F8 打断点  ctrl+shift+F8查看所有断点  在打断点行ctrl+shift+F8就是断点加条件https://www.imooc.com/video/16228
+shift+F9 debug调试  单步跳入运行F8  跳到下一个断点F9  ALT+F9一直跳到光标所在
+在调试过程中动态改变变量值 F2
+crtl+f11收藏（ctrl+1跳转）  alt+2打开收藏  ctrl+f12查看该文件的field、method
+postfix 设置快写 a.notnull  a.new/return   10.for
+name.field在成员方法自动生成this.name=name，在类变量生成pravite final String name；
+设置符号上autosroll 自动打开目录
+alt+1 跳到project（esc跳回代码窗口） 
+ctrl+shift+<-移动代码窗口
+ALT+V 代码视图
+Inject language 在“”内alt+enter编写json字符串转义双引号
+ALT+J 批量操作
+ALT+INSERT 快速实现  
+ctrl+i 快速实现接口类 
+ctrl+j 出现模板 
+idea add maven artifactId依赖快速导入jar
+alt+enter 自动创建函数、重构更简写法   
+ALT+F1弹出视图
+接口跳转到实现类：在接口类的方法上使用快捷键Ctrl+Alt+B
+实现类跳转到接口类方法:在实现类的方法上使用快捷键Ctrl+U
+ALT+CTRL+V（抽取调用方法的实参，在调用方法外添加一个变量）、P（抽取成员变量为方法参数）
+maven show denpendencies ctrl+shift+alt+u 查看类依赖/继承
+查看类层级关系，ctrl+h，查看方法层级关系，ctrl+alt+h
+
+add cherry_pick_test
