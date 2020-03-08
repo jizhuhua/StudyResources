@@ -120,6 +120,9 @@ name.field在成员方法自动生成this.name=name，在类变量生成pravite 
 设置符号上autosroll 自动打开目录
 alt+1 跳到project（esc跳回代码窗口） 
 ctrl+shift+<-移动代码窗口
+ctrl+shift+e 跳转到最近修改
+ctrl+alt+[ 跳转到另一项目界面
+shift+shfit 查看class file 方法/域 快捷键
 ALT+V 代码视图
 Inject language 在“”内alt+enter编写json字符串转义双引号
 ALT+J 批量操作
