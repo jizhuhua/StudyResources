@@ -29,6 +29,7 @@ mv 旧目录名 目录新名称（也可用于文件、压缩包重命名）
 mv 目录名 移动到的新目录位置：剪切操作
 
 cp - r 目录名 目标位置：拷贝操作
+scp ./test.txt root@10.29.255:/opt/
 rm - rf 目录/文件/压缩包 删
 
 touch 文件名
@@ -48,6 +49,8 @@ e! 放弃所有修改，从上次保存文件开始再编辑
 tar - z（调用gzip压缩）c（打包）v（显示运行过程）f（指定文件名） 打包压缩后的文件名 要打包压缩的文件：默认打包到当前
 tar - x（解压）vf 文件名：默认解压到当前 
 tar - xvf xxx.tar.gz - C 想解压到的具体位置
+gzip -d
+zcat test.txt | grep ""
 
 ls -lrt ：组合起来就是按修改时间倒序输出
 
@@ -60,7 +63,13 @@ kill - 9 进程pid 强制杀死进程
 ifconfig查看当前系统网卡信息
 ping查看某某机器连接情况
 netstat -an 查看当前系统端口使用
+netstat -nop | grep 3306 | wc -l 统计端口监听数
+lsof -i:端口号 lsof -i | grep 进程号
+curl -v telnet://
 
+free 查看内存
+
+>/dev/null 2>&1 标准错误不打印
 
 GIT:
 https://wenku.baidu.com/view/86c2714adcccda38376baf1ffc4ffe473268fd5d.html
@@ -82,7 +91,11 @@ git branch查看分支(*表示当前)  git branch brach_name创建新分支
 git checkout branch_name切换到新分支
 git branch -d branch_name删分支
 
-在master：git merge branch_name 合入新分支变更
+git merge branch_name 在master合入新分支变更
+git fetch upstream 拉取新分支信息
+git pull --rebase upstream master 将自己的提交放到最新
+git commit --amend 修改最近提交信息
+git rebase -i HEAD~2 修改最近2次提交
 
 git stash 暂存本地修改 查看git stash list 后 git stash pop stash{}
 
